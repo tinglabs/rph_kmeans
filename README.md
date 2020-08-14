@@ -139,7 +139,7 @@ A more detailed result is as follow (Metric mean and standard deviation of 10  r
 
 | Method | Real Time (s) | CPU Time (s) | ARI | NMI |
 | ---- | ---- | ---- | ---- | ---- | 
-| RPH-KMeans (n_init=1)) | 0.208 (0.105) | 0.206 (0.105) | 0.997 (0.000) | 0.992 (0.000) |
+| RPH-KMeans (n_init=1) | 0.208 (0.105) | 0.206 (0.105) | 0.997 (0.000) | 0.992 (0.000) |
 | KMeans (kmeans++; n_init=1) | 0.074 (0.042) | 0.074 (0.042) | 0.175 (0.062) | 0.441 (0.079) |
 | KMeans (kmeans++; n_init=5) | 0.325 (0.168) | 0.325 (0.168) | 0.316 (0.227) | 0.570 (0.141) |
 | KMeans (kmeans++; n_init=10) | 0.636 (0.318) | 0.636 (0.318) | 0.693 (0.373) | 0.805 (0.230) |
