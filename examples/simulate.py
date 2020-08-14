@@ -22,7 +22,7 @@ import pandas as pd
 from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 from sklearn.cluster import KMeans
 from collections import Counter
-from rp_kmeans import RPKMeans, select_k_with_bic
+from rph_kmeans import RPHKMeans, select_k_with_bic
 
 
 def simulate_2d_gaussian_imbanlance():
@@ -116,10 +116,10 @@ def test_performance(dense_X, y_true):
 		{'bkt_improve': 'min_center_dist', 'center_dist_keepr':0.8},
 	]
 
-	clt_initializer = RPKMeans
+	clt_initializer = RPHKMeans
 	for prv, is_sparse, bkt_imp_dict in itertools.product(point_reducer_versions, is_sparse_list, bkt_improve_dicts):
 		X = sparse_X if is_sparse else dense_X
-		clt_name = 'rp_kmeans_{}_{}_imp_{}'.format(prv, 'sparsex' if is_sparse else 'densex',
+		clt_name = 'rph_kmeans_{}_{}_imp_{}'.format(prv, 'sparsex' if is_sparse else 'densex',
 			bkt_imp_dict['bkt_improve'])
 		print('\nrunning {} -------------------------'.format(clt_name))
 		clt_kwargs = {**{'n_clusters':n_clusters, 'point_reducer_version':prv, 'verbose':True}, **bkt_imp_dict}
@@ -139,24 +139,24 @@ def show_pipeline(dense_X, y_true):
 	n_clusters = len(np.unique(y_true))
 	dot_plot(os.path.join(fig_save_folder, 'y_true.png'), dense_X[:, 0], dense_X[:, 1], y_true, 'True label')
 
-	# RP-KMeans =======================================================================
-	clt = RPKMeans(n_clusters=n_clusters)
+	# RPH-KMeans =======================================================================
+	clt = RPHKMeans(n_clusters=n_clusters)
 	y_pred = clt.fit_predict(dense_X)
 	y_pred = reset_y_pred(y_pred, y_true)   # To make the picture consistent
 
 	draw_points = np.vstack([clt.reduced_X_, clt.init_centers_])
 	draw_labels = ['reduced point'] * clt.reduced_X_.shape[0] + ['initial center'] * n_clusters
-	dot_plot(fig_save_folder + os.sep + 'rp_kmeans_reduced_points.png', draw_points[:, 0], draw_points[:, 1],
+	dot_plot(fig_save_folder + os.sep + 'rph_kmeans_reduced_points.png', draw_points[:, 0], draw_points[:, 1],
 		draw_labels, 'Reduced points and initial centers', sizes={'reduced point': 40, 'initial center': 100})
 
 	draw_points = np.vstack([dense_X, clt.cluster_centers_])
 	draw_labels = ['data point'] * dense_X.shape[0] + ['cluster center'] * n_clusters
-	dot_plot(fig_save_folder + os.sep + 'rp_kmeans_cluster_centers.png', draw_points[:, 0], draw_points[:, 1],
+	dot_plot(fig_save_folder + os.sep + 'rph_kmeans_cluster_centers.png', draw_points[:, 0], draw_points[:, 1],
 		draw_labels, 'Data points and cluster centers', sizes={'data point': 40, 'cluster center': 100})
 
 	ari, nmi = adjusted_rand_score(y_true, y_pred), normalized_mutual_info_score(y_true, y_pred),
-	dot_plot(fig_save_folder + os.sep + 'rp_kmeans_y_pred.png',
-		dense_X[:, 0], dense_X[:, 1], y_pred, title='rp-kmeans (ARI={:.2f}; NMI={:.2f})'.format(ari, nmi))
+	dot_plot(fig_save_folder + os.sep + 'rph_kmeans_y_pred.png',
+		dense_X[:, 0], dense_X[:, 1], y_pred, title='rph-kmeans (ARI={:.2f}; NMI={:.2f})'.format(ari, nmi))
 
 	# KMeans (kmeans++ init) =======================================================================
 	clt = KMeans(n_clusters=n_clusters, n_init=1, init='k-means++')

@@ -1,3 +1,3 @@
-include rp_kmeans/*.h
-include rp_kmeans/*.pxd
-include rp_kmeans/*.pyx
+include rph_kmeans/*.h
+include rph_kmeans/*.pxd
+include rph_kmeans/*.pyx

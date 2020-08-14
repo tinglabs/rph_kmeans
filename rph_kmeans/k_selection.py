@@ -20,14 +20,14 @@ from tqdm import tqdm
 def get_point_reducer(point_reducer_version='cy'):
 	if point_reducer_version == 'cy':
 		try:
-			from rp_kmeans.point_reducer_cy import RPPointReducerCy
+			from rph_kmeans.point_reducer_cy import RPPointReducerCy
 			RPPointReducer = RPPointReducerCy
 		except:
-			warnings.warn('The cython version of rp-kmeans is not installed properly. Use python version instead.')
-			from rp_kmeans.point_reducer_py import RPPointReducerPy
+			warnings.warn('The cython version of rph-kmeans is not installed properly. Use python version instead.')
+			from rph_kmeans.point_reducer_py import RPPointReducerPy
 			RPPointReducer = RPPointReducerPy
 	else:
-		from rp_kmeans.point_reducer_py import RPPointReducerPy
+		from rph_kmeans.point_reducer_py import RPPointReducerPy
 		RPPointReducer = RPPointReducerPy
 	return RPPointReducer
 

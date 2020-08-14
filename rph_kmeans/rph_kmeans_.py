@@ -8,7 +8,7 @@ import numpy as np
 from copy import deepcopy
 from sklearn.cluster import KMeans
 
-class RPKMeans(object):
+class RPHKMeans(object):
 	def __init__(self, n_clusters=8, n_init=1, point_reducer_version='cy',
 			w=None, max_point=2000, proj_num=5, max_iter=1000, sample_dist_num=1000,
 			bkt_improve=None, radius_divide=None, bkt_size_keepr=1.0, center_dist_keepr=1.0,
@@ -24,8 +24,8 @@ class RPKMeans(object):
 				Version of point reducer module. 'cy' is for cython version and 'py' is for python version.
 				If cython version is failed to import, python version will be used instead.
 			w (float): default: None
-				Width of bucket for random projection process. If set to None, w will be half of
-				the median of paired distance sample from input X.
+				Width of bucket for random projection process. If set to None, w will be the half of
+				the median of distances of paired samples from input X.
 			max_point (int): default: 2000
 				Algorithm will stop when reduced point number is less than max_point. If max_point is larger than
 				or equal to sample number of X, the process of point reduction won't run.
@@ -34,7 +34,7 @@ class RPKMeans(object):
 			max_iter (int): default: 1000
 				Maximum number of iterations of the algorithm to run.
 			sample_dist_num (int): default: 1000
-				Number of samples chosen to decide default w. Will be ignored when w is set by user.
+				Number of paired samples chosen to decide default w. It will be ignored when w is set by user.
 			bkt_improve (str or None): {None, 'radius', 'min_bkt_size', 'min_center_dist'}
 				Methods of improving bucket quality.
 			radius_divide (float): default: None
@@ -78,14 +78,14 @@ class RPKMeans(object):
 		"""
 		if point_reducer_version == 'cy':
 			try:
-				from rp_kmeans.point_reducer_cy import RPPointReducerCy
+				from rph_kmeans.point_reducer_cy import RPPointReducerCy
 				RPPointReducer = RPPointReducerCy
 			except:
-				warnings.warn('The cython version of rp-kmeans is not installed properly. Use python version instead.')
-				from rp_kmeans.point_reducer_py import RPPointReducerPy
+				warnings.warn('The cython version of rph-kmeans is not installed properly. Use python version instead.')
+				from rph_kmeans.point_reducer_py import RPPointReducerPy
 				RPPointReducer = RPPointReducerPy
 		else:
-			from rp_kmeans.point_reducer_py import RPPointReducerPy
+			from rph_kmeans.point_reducer_py import RPPointReducerPy
 			RPPointReducer = RPPointReducerPy
 		self.point_reducer = RPPointReducer(w, max_point, proj_num, max_iter, sample_dist_num,
 			bkt_improve, radius_divide, bkt_size_keepr, center_dist_keepr, verbose)

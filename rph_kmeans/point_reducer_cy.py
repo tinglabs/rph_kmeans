@@ -7,11 +7,11 @@ import scipy.sparse as sp
 import numpy as np
 from collections import Counter
 
-from rp_kmeans.point_reducer_base import RPPointReducerBase
-from rp_kmeans._point_reducer_cy import get_ary_labels
-from rp_kmeans._point_reducer_cy import update_densex_and_weight, update_sparsex_and_weight, update_labels
-from rp_kmeans._point_reducer_cy import densex_radius_bkt_improve, sparsex_radius_bkt_improve
-from rp_kmeans.utils import cal_dist2_ary_sparse, cal_dist2_ary_dense
+from rph_kmeans.point_reducer_base import RPPointReducerBase
+from rph_kmeans._point_reducer_cy import get_ary_labels
+from rph_kmeans._point_reducer_cy import update_densex_and_weight, update_sparsex_and_weight, update_labels
+from rph_kmeans._point_reducer_cy import densex_radius_bkt_improve, sparsex_radius_bkt_improve
+from rph_kmeans.utils import cal_dist2_ary_sparse, cal_dist2_ary_dense
 
 
 class RPPointReducerCy(RPPointReducerBase):

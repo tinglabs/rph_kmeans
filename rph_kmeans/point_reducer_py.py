@@ -6,9 +6,9 @@
 import scipy.sparse as sp
 import numpy as np
 
-from rp_kmeans.point_reducer_base import RPPointReducerBase
-from rp_kmeans.utils import cal_dist2_ary_sparse, cal_dist2_ary_dense
-from rp_kmeans.utils import cal_weighted_ave_sparse_vec, cal_weighted_ave_dense_vec
+from rph_kmeans.point_reducer_base import RPPointReducerBase
+from rph_kmeans.utils import cal_dist2_ary_sparse, cal_dist2_ary_dense
+from rph_kmeans.utils import cal_weighted_ave_sparse_vec, cal_weighted_ave_dense_vec
 
 class RPPointReducerPy(RPPointReducerBase):
 	def __init__(self, w=None, max_point=2000, proj_num=5, max_iter=1000, sample_dist_num=1000,

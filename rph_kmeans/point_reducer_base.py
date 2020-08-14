@@ -9,7 +9,7 @@ import scipy.sparse as sp
 from sklearn.metrics.pairwise import paired_distances
 from sklearn.utils import check_array
 
-from rp_kmeans.utils import check_return
+from rph_kmeans.utils import check_return
 
 
 class RPPointReducerBase(object):
