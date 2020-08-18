@@ -201,7 +201,7 @@ def test_k_selection(dense_X, y_true):
 	sns.lineplot(x='K', y='BIC', data=pd.DataFrame({'K': k_range, 'BIC': bic_list_draw}), ax=ax)
 	v_min, v_max = min(bic_list_draw), max(bic_list_draw)
 	plt.vlines(n_clusters_true, v_min, v_max, colors='k', label=f'True k', linestyles='--')
-	plt.vlines(n_clusters_true, v_min, v_max, colors='r', label=f'Predicted k', linestyles='--')
+	plt.vlines(n_clusters_pred, v_min, v_max, colors='r', label=f'Predicted k', linestyles='--')
 	plt.legend()
 	plt.savefig(os.path.join(fig_save_folder, 'K-BIC.png'))
 	plt.close()
