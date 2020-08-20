@@ -45,7 +45,7 @@ class RPPointReducerBase(object):
 	def get_w(self, X):
 		sample_dist = self.get_sample_dist(X)
 		w = np.median(sample_dist) * 0.5
-		print(f'Note: w of RP is automatically set to {w}')
+		print(f'Note: w of RPH is automatically set to {w}')
 		return w
 
 
