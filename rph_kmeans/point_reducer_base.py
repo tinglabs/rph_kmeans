@@ -44,7 +44,9 @@ class RPPointReducerBase(object):
 	@check_return('w')
 	def get_w(self, X):
 		sample_dist = self.get_sample_dist(X)
-		return np.median(sample_dist) * 0.5
+		w = np.median(sample_dist) * 0.5
+		print(f'Note: w of RP is automatically set to {w}')
+		return w
 
 
 	def gen_proj(self, dim, w):
