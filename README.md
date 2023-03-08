@@ -1,6 +1,6 @@
 # RPH-KMeans 
 
-**RPH-KMeans** is a variant of kmeans algorithm in which the initial centers is produced by point reduction process using one of the **local sensitive hashing (LSH)** technique called **random projection (RP)**.
+**RPH-KMeans** is a variant of kmeans algorithm in which the initial centers are produced by point reduction process using one of the **local sensitive hashing (LSH)** techniques called **random projection (RP)**.
 
 
 # Installation
